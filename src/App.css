@@ -1,38 +1,493 @@
-.App {
+
+/* =========================
+   🌌 APP BACKGROUND
+========================= */
+.app {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  color: white;
   min-height: 100vh;
+
+  background: linear-gradient(-45deg, #0b0f19, #0f172a, #111827, #0a0a0a);
+  background-size: 300% 300%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* =========================
+   🔝 HEADER
+========================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+
+  padding: 12px 25px;
+
+  /* glass effect */
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+h1 {
+  margin: 0;
+}
+/* 🎬 LOGO STYLE */
+.logo {
+  font-size: 82px;
+  font-weight: bold;
+
+  /* gradient text */
+  background: linear-gradient(45deg, #c9a308, #01c151);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: 1px;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* 🔍 SEARCH IMPROVE */
+.search {
+  padding: 8px 15px;
+  width: 180px;
+
+  border-radius: 20px;
+  border: none;
+  outline: none;
+
+  background: rgba(255,255,255,0.1);
+  color: white;
+
+  backdrop-filter: blur(5px);
+  transition: 0.3s;
+}
+
+.search::placeholder {
+  color: #ccc;
+}
+
+.search:focus {
+  width: 230px;
+  background: rgba(0,0,0,0.5);
+}
+
+/* ✨ subtle glow */
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+
+  background: linear-gradient(90deg, #3b82f6, #ec4899, #3b82f6);
+  opacity: 0.5;
+}
+
+/* =========================
+   🔍 SEARCH BAR
+========================= */
+.search {
+  padding: 8px 12px;
+  width: 180px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.search:focus {
+  width: 220px;
+  background: #222;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* =========================
+   🎬 MOVIE GRID
+========================= */
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 120px; /* footer space */
 }
 
-@keyframes App-logo-spin {
+/* =========================
+   🎥 MOVIE CARD
+========================= */
+.movie {
+  width: 180px;
+  margin: 15px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.movie:hover {
+  transform: scale(1.06);
+}
+
+.movie img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* =========================
+   🔥 HOVER INFO BAR
+========================= */
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background: rgba(0,0,0,0.85);
+  padding: 6px;
+  font-size: 12px;
+
+  opacity: 0;
+  transform: translateY(100%);
+  transition: 0.3s ease;
+}
+
+.movie:hover .movie-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   📦 FOOTER WRAPPER
+========================= */
+.footer-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+}
+
+/* =========================
+   🌫️ GLASS FOOTER
+========================= */
+.footer {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: white;
+  padding: 20px;
+
+  transform: translateY(100%);
+  transition: 0.5s ease;
+
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* show on scroll */
+.footer-wrapper.show .footer {
+  transform: translateY(0);
+}
+
+/* =========================
+   📋 FOOTER CONTENT
+========================= */
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.footer h3 {
+  font-size: 14px;
+  color: #3b82f6;
+  margin-bottom: 5px;
+}
+
+.footer p {
+  font-size: 12px;
+  color: #ccc;
+  margin: 3px 0;
+}
+
+/* =========================
+   ❤️ SOCIAL ICONS
+========================= */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #3b82f6;
+  transform: scale(1.2);
+}
+
+/* =========================
+   📜 FOOTER BOTTOM
+========================= */
+.footer-bottom {
+  font-size: 11px;
+  color: #888;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  margin: 20px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #2563eb;
+}
+
+/* DETAILS LAYOUT */
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+/* IMAGE CENTER */
+.details-img {
+  width: 300px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+/* TEXT SIDE */
+.details-info {
+  max-width: 500px;
+  text-align: left;
+  margin: 20px;
+}
+
+.details-info h1 {
+  margin-bottom: 10px;
+}
+
+/* OVERVIEW TEXT */
+.overview {
+  margin-top: 15px;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+/* ensure footer same behave kare */
+.content {
+  min-height: 100vh;
+  padding-bottom: 120px; /* footer space */
+}
+
+
+/* 🌄 BACKDROP */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px) brightness(0.4);
+  z-index: -1;
+}
+
+/* overlay */
+.overlay {
+  position: relative;
+  padding: 20px;
+}
+
+/* rating colors */
+.green { color: #22c55e; }
+.orange { color: #f59e0b; }
+.red { color: #ef4444; }
+
+/* similar movies */
+.similar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.similar img {
+  width: 120px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.similar img:hover {
+  transform: scale(1.1);
+}
+
+/* 🎥 MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  width: 80%;
+  max-width: 800px;
+}
+.chat-toggle {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 999;
+  background: #3b82f6;
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.chatbox {
+  position: fixed;
+  bottom: 150px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: rgba(0,0,0,0.85);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  color: white;
+}
+
+.message {
+  margin: 5px 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.user {
+  background: #3b82f6;
+  align-self: flex-end;
+}
+
+.bot {
+  background: #1f2937;
+  align-self: flex-start;
+}
+
+.chat-input {
+  display: flex;
+  border-top: 1px solid #333;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+}
+
+.chat-input button {
+  background: #3b82f6;
+  border: none;
+  color: white;
+  padding: 8px;
+}
+/* HEADER of chatbot */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+  background: #111827;
+  color: white;
+  font-weight: bold;
+}
+
+.chat-header button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* better scroll */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* smooth UI */
+.chatbox {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
   from {
-    transform: rotate(0deg);
+    transform: translateY(20px);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
